@@ -73,14 +73,16 @@ public class TodoRepositoryImpl implements TodoRepository {
     @Override
     public void delete(String date, int index) {
         System.out.println("[TodoRepositoryImpl.delete()]");
+        // 날짜에 해당하는 할 일 리스트를 먼저 얻어온다.
+        // 해당 날짜에 리스트가 비어 있는지 확인하고 비어있으면 리턴
 
         List<Todo> todos = this.todoMap.get(date);
-
+        // 리스트에서 받은 index 번호 삭제
         if (todos != null && index >= 0 && index < todos.size()) {
             todos.remove(index); // 데이터 지우기
             System.out.println("삭제 완료");
 
-            // 만약 지우고 났더니 리스트가 텅 비었다면, 날짜(Key) 자체를 맵에서 지워줍니다.
+            // 삭제 후에 리스트가 비어있으면, 사물함도 뺀다.
             if (todos.isEmpty()) {
                 this.todoMap.remove(date);
             }

@@ -95,8 +95,10 @@ public class TodoRepositoryImpl implements TodoRepository {
     public void complete(String date, int index) {
         System.out.println("[TodoRepositoryImpl.complete()]");
 
+        // 해당 날짜의 리스트 가져오기
         List<Todo> todos = this.todoMap.get(date);
 
+        // 리스트가 비어있는지, 인덱스가 존재하는 건지 확인
         if (todos != null && index >= 0 && index < todos.size()) {
             Todo todo = todos.get(index);
             todo.setCompleted(true); // 해당 할 일의 상태를 '완료'로 변경
